@@ -22,12 +22,12 @@ if __name__ == "__main__":
         random_state=42
     )
 
-    # val_images, test_images, val_masks, test_masks = train_test_split(
-    #     val_images,
-    #     val_masks,
-    #     test_size=0.5,
-    #     random_state=42
-    # )
+    val_images, test_images, val_masks, test_masks = train_test_split(
+        val_images,
+        val_masks,
+        test_size=0.5,
+        random_state=42
+    )
 
     # Create JSON structure
     train_data = [
@@ -46,18 +46,18 @@ if __name__ == "__main__":
         for img, msk in zip(val_images, val_masks)
     ]
 
-    # test_data = [
-    #     {
-    #         "image": os.path.join(image_dir, img),
-    #         "mask": os.path.join(mask_dir, msk)
-    #     }
-    #     for img, msk in zip(test_images, test_masks)
-    # ]
+    test_data = [
+        {
+            "image": os.path.join(image_dir, img),
+            "mask": os.path.join(mask_dir, msk)
+        }
+        for img, msk in zip(test_images, test_masks)
+    ]
 
     combined_data = {
         'train': train_data,
         'valid': val_data,
-        # 'test': test_data,
+        'test': test_data,
     }
 
     # Save the JSON file

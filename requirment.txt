@@ -1,6 +1,7 @@
 albumentations==1.4.8
-pytorch-lightning==2.2.4
+pytorch-lightning==2.2.5
 torchvision==0.18.0
 torch==2.3.0
 torchmetrics==1.4.0
+pretrainedmodels==0.7.4
 tensorboard==2.16.2

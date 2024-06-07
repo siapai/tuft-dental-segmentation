@@ -9,7 +9,8 @@ This repository contains experiments on the Tuft Dental Datasets using various s
 - [Backbones](#backbones)
 - [Hyperparameters](#hyperparameters)
 - [Criterion and Evaluation Metrics](#criterion-and-evaluation-metrics)
-- [Results](#results)
+- [Test Results](#test-results)
+- [Prediction Results](#prediction-results)
 - [Installation](#installation)
 - [Libraries Usage](#libraries-usage)
 
@@ -32,7 +33,7 @@ To enhance the robustness of our dataset, we applied a variety of transformation
 - **Color and Contrast Adjustments:** Adjustments to brightness, contrast, saturation, and hue to account for varying lighting conditions and improve the model's ability to generalize.
 - **Blur and Noise:** Introduction of Gaussian blur, motion blur, and noise to make the model robust to different types of image artifacts.
 - **Distortions:** Application of elastic transformations, grid distortions, and optical distortions to mimic real-world deformations and enhance the model's adaptability.
-- **Flips:** Horizontal and vertical flips to provide the model with a diverse set of orientations.
+- **Flips:** Horizontal flips to provide the model with a diverse set of orientations.
 - **Other Effects:** Additional effects such as CLAHE (Contrast Limited Adaptive Histogram Equalization), sharpen, emboss, blur, and gamma correction to further diversify the training data and enhance feature extraction.
 
 These augmentations are carefully applied to preserve the detailed information within the images, ensuring the augmented dataset remains a valuable resource for effective model training and testing.
@@ -89,7 +90,6 @@ The following hyperparameters are used for training the models:
 - **Scheduler**: Reduce On Plateau
   - **Factor**: 0.5
   - **Patience**: 5
-- **Max Epochs**: 300
 - **Early Stopping**: Patience 20
 
 
@@ -126,8 +126,64 @@ The models are ranked based on the average of Dice Coefficient, IoU, and Pixel A
 | 14   | PSPNet     | MobilenetV2 | 0.8797           | 0.7866    | 0.9706         | 0.8790  | 34m 46s  |
 
 
+## Test Results
+The rank is based on the average of the test dice, test IoU, and test accuracy metrics.
 
-## Results
+| Rank | Architecture  | Encoder        | Test Dice   | Test IoU    | Test Accuracy | Inference Time (s) |
+|------|---------------|----------------|-------------|-------------|---------------|--------------------|
+| 1    | UNetPlusPlus  | ResNet34       | 0.9115      | 0.8387      | 0.9793        | 0.0280             |
+| 2    | UNet          | ResNet34       | 0.9048      | 0.8273      | 0.9778        | 0.0111             |
+| 3    | DeepLabV3Plus | ResNet34       | 0.9028      | 0.8242      | 0.9773        | 0.0224             |
+| 4    | UNetPlusPlus  | MobileNetV2    | 0.9026      | 0.8236      | 0.9771        | 0.0309             |
+| 5    | DeepLabV3Plus | MobileNetV2    | 0.8945      | 0.8111      | 0.9753        | 0.0213             |
+| 6    | FPN           | MobileNetV2    | 0.8922      | 0.8074      | 0.9747        | 0.0174             |
+| 7    | DeepLabV3     | ResNet34       | 0.8933      | 0.8088      | 0.9747        | 0.0671             |
+| 8    | PAN           | ResNet34       | 0.9031      | 0.8263      | 0.9775        | 0.0656             |
+| 9    | UNet          | MobileNetV2    | 0.9036      | 0.8247      | 0.9772        | 0.0594             |
+| 10   | FPN           | ResNet34       | 0.8835      | 0.7940      | 0.9728        | 0.0379             |
+| 11   | PSPNet        | ResNet34       | 0.8866      | 0.7976      | 0.9730        | 0.0213             |
+| 12   | PAN           | MobileNetV2    | 0.8884      | 0.8026      | 0.9742        | 0.0209             |
+| 13   | DeepLabV3     | MobileNetV2    | 0.8768      | 0.7821      | 0.9705        | 0.0564             |
+| 14   | PSPNet        | MobileNetV2    | 0.8760      | 0.7805      | 0.9705        | 0.0182             |
+
+The rank is based on the inference time, faster models are ranked higher
+
+| Rank | Architecture  | Encoder        | Test Dice   | Test IoU    | Test Accuracy | Inference Time (s) |
+|------|---------------|----------------|-------------|-------------|---------------|--------------------|
+| 1    | FPN           | MobileNetV2    | 0.8922      | 0.8074      | 0.9747        | 0.0174             |
+| 2    | PSPNet        | MobileNetV2    | 0.8760      | 0.7805      | 0.9705        | 0.0182             |
+| 3    | PAN           | MobileNetV2    | 0.8884      | 0.8026      | 0.9742        | 0.0209             |
+| 4    | DeepLabV3Plus | MobileNetV2    | 0.8945      | 0.8111      | 0.9753        | 0.0213             |
+| 5    | PSPNet        | ResNet34       | 0.8866      | 0.7976      | 0.9730        | 0.0213             |
+| 6    | DeepLabV3Plus | ResNet34       | 0.9028      | 0.8242      | 0.9773        | 0.0224             |
+| 7    | UNet          | ResNet34       | 0.9048      | 0.8273      | 0.9778        | 0.0111             |
+| 8    | UNetPlusPlus  | ResNet34       | 0.9115      | 0.8387      | 0.9793        | 0.0280             |
+| 9    | UNetPlusPlus  | MobileNetV2    | 0.9026      | 0.8236      | 0.9771        | 0.0309             |
+| 10   | FPN           | ResNet34       | 0.8835      | 0.7940      | 0.9728        | 0.0379             |
+| 11   | UNet          | MobileNetV2    | 0.9036      | 0.8247      | 0.9772        | 0.0594             |
+| 12   | DeepLabV3     | MobileNetV2    | 0.8768      | 0.7821      | 0.9705        | 0.0564             |
+| 13   | PAN           | ResNet34       | 0.9031      | 0.8263      | 0.9775        | 0.0656             |
+| 14   | DeepLabV3     | ResNet34       | 0.8933      | 0.8088      | 0.9747        | 0.0671             |
+
+### Recommended Model Based on Average Metrics:
+**Model: UNetPlusPlus with ResNet34**
+
+*Reason:*
+
+Highest average performance across Test Dice (0.9115), Test IoU (0.8387), and Test Accuracy (0.9793).
+Ranked 1st based on average metrics.
+
+
+### Recommended Model Based on Inference Time:
+**Model: FPN with MobileNetV2**
+
+*Reason:*
+
+Fastest inference time (0.0174 seconds).
+Still has good performance with Test Dice (0.8922), Test IoU (0.8074), and Test Accuracy (0.9747).
+Ranked 1st based on inference time.
+
+## Prediction Results
 *This section showcases the performance of the Unet++ ResNet34 model on the test dataset. Below are the original image, ground truth, and the model's prediction.*
 
 ![Tuft Dental](resources/tuft_dental_results.png)

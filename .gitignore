@@ -64,3 +64,5 @@ Desktop.ini
 
 # Ignore all .ckpt files in the folder and subfolders
 **/*.ckpt
+
+data/

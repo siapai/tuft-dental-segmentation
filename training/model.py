@@ -2,7 +2,8 @@ import segmentation as sm
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping, LearningRateMonitor
 from torchmetrics import JaccardIndex, Accuracy
-
+import torch
+import time
 
 checkpoint_cb = ModelCheckpoint(
     monitor='val_loss',
@@ -93,9 +94,20 @@ class DentalModel(pl.LightningModule):
 
     def test_step(self, batch, batch_idx):
         _, target_mask = batch
+        start_time = time.time()
         loss, logits_mask = self._common_step(batch)
+        end_time = time.time()
+
+        inference_time = end_time - start_time
+        self.log('inference_time', inference_time, prog_bar=True)
+
         self._calc_metrics(loss, logits_mask, target_mask, "test")
-        return loss
+        return {loss, inference_time}
+
+    def on_test_epoch_end(self):
+        avg_inference_time = torch.tensor(self.trainer.callback_metrics['inference_time'].cpu()).mean()
+
+        self.log('avg_inference_time', avg_inference_time)
 
     def configure_optimizers(self):
         optimizer = torch.optim.Adam(self.parameters(), lr=1e-3)
