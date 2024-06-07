@@ -1,0 +1,6 @@
+albumentations==1.4.8
+pytorch-lightning==2.2.4
+torchvision==0.18.0
+torch==2.3.0
+torchmetrics==1.4.0
+tensorboard==2.16.2
