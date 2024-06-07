@@ -185,9 +185,18 @@ Still has good performance with Test Dice (0.8922), Test IoU (0.8074), and Test 
 Ranked 1st based on inference time.
 
 ## Prediction Results
-*This section showcases the performance of the Unet++ ResNet34 model on the test dataset. Below are the original image, ground truth, and the model's prediction.*
 
-![Tuft Dental](resources/tuft_dental_results.png)
+- **UNet++ with ResNet34**
+
+*This section highlights the performance of the UNet++ model with ResNet34 on the test dataset. Below, you can observe the original image, the ground truth mask, and the model's prediction, demonstrating its effectiveness in capturing details.*
+
+![Tuft Dental](resources/tuft_dental_prediction_unetplusplus_resnet.png)
+
+- **FPN with MobileNetV2**
+
+*Here we present the performance of the FPN model with MobileNetV2. Despite its quick inference time, this model maintains commendable accuracy. Below are the original image, the ground truth mask, and the model's prediction, illustrating its capabilities.*
+
+![Tuft Dental](resources/tuft_dental_prediction_fpn_mobilenet.png)
 
 ## Installation
 Clone the repository and install the required dependencies:
