@@ -13,6 +13,7 @@ This repository contains experiments on the Tuft Dental Datasets using various s
 - [Prediction Results](#prediction-results)
 - [Installation](#installation)
 - [Inference Usage](#inference-usage)
+- [Run Tensorboard](#run-tensorboard)
 - [Libraries](#libraries)
 
 ## Introduction
@@ -236,6 +237,12 @@ with torch.inference_mode():
 
 ```
 
+## Run Tensorboard
+
+Here’s how you can enhance the process by running TensorBoard to explore experiment results
+```
+ tensorboard --logdir=tensorboards
+```
 ## Libraries
 
 The following libraries are utilized in this project to ensure efficient and effective processing and modeling of the dataset:
