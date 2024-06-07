@@ -7,15 +7,25 @@ This repository contains experiments on the Tuft Dental Datasets using various s
 - [Dataset](#dataset)
 - [Models](#models)
 - [Backbones](#backbones)
+- [Hyperparameters](#hyperparameters)
 - [Criterion and Evaluation Metrics](#criterion-and-evaluation-metrics)
 - [Installation](#installation)
+- [Libraries Usage](#libraries-usage)
 
 ## Introduction
 In this project, we explore the segmentation of dental images using several advanced neural network architectures. The models include U-Net, FPN, PAN, PSPNet, DeepLabV3, DeepLabV3+, U-Net++, and variants with ResNet34 and MobileNetV2 backbones. The objective is to identify the best performing model for accurate and efficient dental image segmentation.
 
 ## Dataset
-The Tuft Dental Database includes panoramic X-ray images, which provide a comprehensive view of the upper and lower jaws, including the teeth, jawbone, and surrounding structures. These images are commonly used in dental diagnostics to detect issues such as impacted teeth, jaw disorders, and overall dental health. The dataset includes annotations to facilitate the development and evaluation of segmentation models.
+The **Tuft Dental Database** is a valuable resource for dental diagnostics, featuring panoramic X-ray images that offer a comprehensive view of the upper and lower jaws. These images capture detailed structures including teeth, jawbones, and surrounding areas, making them essential for identifying issues like impacted teeth, jaw disorders, and assessing overall dental health. The dataset is meticulously annotated to support the development and evaluation of advanced segmentation models.
 
+### Dataset Split
+- **Training Set**: 700 images
+- **Validation Set**: 150 images
+- **Test Set**: 150 images
+
+To enhance the dataset's robustness, a variety of transformations from the Albumentations library have been applied. These augmentations are thoughtfully executed to maintain the intricate details and integrity of the original images, ensuring high-quality data for model training and testing.
+
+The dataset has been augmented using various transformations from Albumentations. These augmentations are applied carefully to ensure that the detailed information within the images is preserved.
 ## Models
 The following segmentation architectures are implemented and compared:
 - **U-Net**: 
@@ -56,6 +66,21 @@ The following backbones are used for feature extraction in some of the models:
   - **Paper**: [MobileNetV2: Inverted Residuals and Linear Bottlenecks](https://arxiv.org/abs/1801.04381)
   - **Description**: MobileNetV2 is designed for mobile and embedded vision applications, focusing on computational efficiency and low memory usage. It introduces inverted residuals, where the input and output are thin bottleneck layers, and linear bottlenecks to maintain a rich feature representation. MobileNetV2 provides a good balance between accuracy and efficiency.
 
+## Hyperparameters
+
+The following hyperparameters are used for training the models:
+
+- **Input Size**: 256 x 512
+- **Batch Size**: 32
+- **Optimizer**: Adam
+- **Learning Rate**: 1e-3
+- **Scheduler**: Reduce On Plateau
+  - **Factor**: 0.5
+  - **Patience**: 5
+- **Max Epochs**: 300
+- **Early Stopping**: Patience 20
+
+
 ## Criterion and Evaluation Metrics
 ### Criterion
 We use `DiceLoss` as the loss function during training to improve the model's performance on segmentation tasks.
@@ -72,3 +97,30 @@ Clone the repository and install the required dependencies:
 git clone https://github.com/siapai/tuft-dental-segmentation.git
 cd tuft-dental-segmentation
 pip install -r requirements.txt
+```
+
+## Libraries Usage
+
+The following libraries are utilized in this project to ensure efficient and effective processing and modeling of the dataset:
+
+- **Torch**: `2.3.0`
+  - The core library for building and training neural networks in PyTorch.
+
+- **Torchvision**: `0.18.0`
+  - A package containing popular datasets, model architectures, and common image transformations for computer vision tasks.
+
+- **Albumentations**: `1.4.8`
+  - Used for advanced data augmentation techniques to enhance the robustness of the model without losing important details in the images.
+
+- **PyTorch Lightning**: `2.2.4`
+  - Provides a high-level framework for organizing and managing PyTorch code, enabling easier experimentation and model training.
+
+- **Torchmetrics**: `1.4.0`
+  - Offers a wide range of metrics for evaluating machine learning models in PyTorch, facilitating consistent and comprehensive performance assessment.
+
+- **TensorBoard**: `2.16.2`
+  - A tool for visualizing and monitoring the training process, providing insights into model performance and helping with debugging and optimization.
+
+
+
+
