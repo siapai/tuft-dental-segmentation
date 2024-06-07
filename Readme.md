@@ -12,7 +12,8 @@ This repository contains experiments on the Tuft Dental Datasets using various s
 - [Test Results](#test-results)
 - [Prediction Results](#prediction-results)
 - [Installation](#installation)
-- [Libraries Usage](#libraries-usage)
+- [Inference Usage](#inference-usage)
+- [Libraries](#libraries)
 
 ## Introduction
 In this project, we delve into the fascinating world of dental image segmentation using a suite of advanced neural network architectures. Our models include U-Net, FPN, PAN, PSPNet, DeepLabV3, DeepLabV3+, and U-Net++, each paired with powerful yet efficient backbones like ResNet34 and MobileNetV2. 
@@ -190,6 +191,9 @@ Ranked 1st based on inference time.
 
 *This section highlights the performance of the UNet++ model with ResNet34 on the test dataset. Below, you can observe the original image, the ground truth mask, and the model's prediction, demonstrating its effectiveness in capturing details.*
 
+
+
+
 ![Tuft Dental](resources/tuft_dental_prediction_unetplusplus_resnet.png)
 
 - **FPN with MobileNetV2**
@@ -206,7 +210,33 @@ cd tuft-dental-segmentation
 pip install -r requirements.txt
 ```
 
-## Libraries Usage
+## Inference Usage
+[>> Download Model <<](https://drive.google.com/file/d/1-hoRpjWgs14i_HqItV_fapQVwiq_HkFE/view?usp=drive_link)
+
+*see Inference.ipynb*
+```angular2html
+from training import DentalModel
+
+...
+
+arch = "unetplusplus"
+encoder_name = "resnet34"
+path = "tensorboards/unetplusplus-resnet34/version_0/checkpoints/best_checkpoint.ckpt"
+model = DentalModel.load_from_checkpoint(path, arch=arch, encoder_name=encoder_name, in_channels=3, out_classes=1)
+
+model.to(device)
+
+model.eval()
+with torch.inference_mode():
+    output = model(augmented.to(device))
+    output = torch.sigmoid(output)
+    output = output.squeeze().cpu().numpy()
+
+...
+
+```
+
+## Libraries
 
 The following libraries are utilized in this project to ensure efficient and effective processing and modeling of the dataset:
 
