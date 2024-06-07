@@ -105,28 +105,29 @@ The performance of each model is evaluated using the following metrics:
 
 ### Model Performance Summary
 
-*This table summarizes the performance metrics (Dice Coefficient, IoU, Pixel Accuracy, and Relative Time) on the validation set for various models with ResNet34 and MobilenetV2 backbones. 
-The models are ranked based on the average of Dice Coefficient, IoU, and Pixel Accuracy.*
+This table summarizes the performance metrics (Dice Coefficient, IoU, Pixel Accuracy, and Relative Time) on the **validation set** for various models with ResNet34 and MobilenetV2 backbones. 
+The models are ranked based on the average of Dice Coefficient, IoU, and Pixel Accuracy.
 
-| Rank | Model      | Backbone    | Dice Coefficient | IoU Value | Pixel Accuracy | Average | Relative |
-|------|------------|-------------|------------------|-----------|----------------|---------|----------|
-| 1    | U-Net++    | ResNet34    | 0.9124           | 0.8401    | 0.9791         | 0.9105  | 55m 33s  |
-| 2    | U-Net      | ResNet34    | 0.9078           | 0.8322    | 0.9778         | 0.9059  | 25m 0s   |
-| 3    | U-Net      | MobilenetV2 | 0.9065           | 0.8296    | 0.9774         | 0.9045  | 31m 38s  |
-| 4    | U-Net++    | MobilenetV2 | 0.9045           | 0.8268    | 0.977          | 0.9028  | 35m 51s  |
-| 5    | DeepLabV3+ | ResNet34    | 0.9056           | 0.8287    | 0.9773         | 0.9039  | 25m 26s  |
-| 6    | PAN        | ResNet34    | 0.9056           | 0.8303    | 0.9776         | 0.9045  | 27m 15s  |
-| 7    | DeepLabV3+ | MobilenetV2 | 0.898            | 0.8166    | 0.9756         | 0.8967  | 40m 18s  |
-| 8    | FPN        | MobilenetV2 | 0.8951           | 0.812     | 0.9748         | 0.8939  | 35m 18s  |
-| 9    | PAN        | MobilenetV2 | 0.8912           | 0.8069    | 0.9742         | 0.8908  | 31m 57s  |
-| 10   | DeepLabV3  | ResNet34    | 0.8962           | 0.8134    | 0.9748         | 0.8948  | 44m 56s  |
-| 11   | DeepLabV3  | MobilenetV2 | 0.8808           | 0.7884    | 0.9709         | 0.8800  | 43m 17s  |
-| 12   | PSPNet     | ResNet34    | 0.89             | 0.8031    | 0.9732         | 0.8888  | 26m 37s  |
-| 13   | FPN        | ResNet34    | 0.8877           | 0.8006    | 0.9731         | 0.8871  | 28m 30s  |
-| 14   | PSPNet     | MobilenetV2 | 0.8797           | 0.7866    | 0.9706         | 0.8790  | 34m 46s  |
+| Rank | Architecture | Encoder     | Dice Coefficient | IoU Value | Pixel Accuracy | Average | Relative |
+|------|--------------|-------------|------------------|-----------|----------------|---------|----------|
+| 1    | U-Net++      | ResNet34    | 0.9124           | 0.8401    | 0.9791         | 0.9105  | 55m 33s  |
+| 2    | U-Net        | ResNet34    | 0.9078           | 0.8322    | 0.9778         | 0.9059  | 25m 0s   |
+| 3    | U-Net        | MobilenetV2 | 0.9065           | 0.8296    | 0.9774         | 0.9045  | 31m 38s  |
+| 4    | U-Net++      | MobilenetV2 | 0.9045           | 0.8268    | 0.977          | 0.9028  | 35m 51s  |
+| 5    | DeepLabV3+   | ResNet34    | 0.9056           | 0.8287    | 0.9773         | 0.9039  | 25m 26s  |
+| 6    | PAN          | ResNet34    | 0.9056           | 0.8303    | 0.9776         | 0.9045  | 27m 15s  |
+| 7    | DeepLabV3+   | MobilenetV2 | 0.898            | 0.8166    | 0.9756         | 0.8967  | 40m 18s  |
+| 8    | FPN          | MobilenetV2 | 0.8951           | 0.812     | 0.9748         | 0.8939  | 35m 18s  |
+| 9    | PAN          | MobilenetV2 | 0.8912           | 0.8069    | 0.9742         | 0.8908  | 31m 57s  |
+| 10   | DeepLabV3    | ResNet34    | 0.8962           | 0.8134    | 0.9748         | 0.8948  | 44m 56s  |
+| 11   | DeepLabV3    | MobilenetV2 | 0.8808           | 0.7884    | 0.9709         | 0.8800  | 43m 17s  |
+| 12   | PSPNet       | ResNet34    | 0.89             | 0.8031    | 0.9732         | 0.8888  | 26m 37s  |
+| 13   | FPN          | ResNet34    | 0.8877           | 0.8006    | 0.9731         | 0.8871  | 28m 30s  |
+| 14   | PSPNet       | MobilenetV2 | 0.8797           | 0.7866    | 0.9706         | 0.8790  | 34m 46s  |
 
 
 ## Test Results
+This table summarizes the performance metrics (Dice Coefficient, IoU, Pixel Accuracy, and Inference Time) on the **test set** for various models with ResNet34 and MobilenetV2 backbones.
 The rank is based on the average of the test dice, test IoU, and test accuracy metrics.
 
 | Rank | Architecture  | Encoder        | Test Dice   | Test IoU    | Test Accuracy | Inference Time (s) |
