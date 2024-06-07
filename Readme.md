@@ -14,7 +14,9 @@ This repository contains experiments on the Tuft Dental Datasets using various s
 - [Libraries Usage](#libraries-usage)
 
 ## Introduction
-In this project, we explore the segmentation of dental images using several advanced neural network architectures. The models include U-Net, FPN, PAN, PSPNet, DeepLabV3, DeepLabV3+, U-Net++, and variants with ResNet34 and MobileNetV2 backbones. The objective is to identify the best performing model for accurate and efficient dental image segmentation.
+In this project, we delve into the fascinating world of dental image segmentation using a suite of advanced neural network architectures. Our models include U-Net, FPN, PAN, PSPNet, DeepLabV3, DeepLabV3+, and U-Net++, each paired with powerful yet efficient backbones like ResNet34 and MobileNetV2. 
+
+The primary goal is to pinpoint the best-performing model that balances accuracy and computational efficiency. This balance is crucial for deploying these models on low- to medium-spec hardware, making advanced dental image analysis accessible and practical in various clinical settings. By leveraging lightweight backbones, we aim to achieve high-quality segmentation without the need for high-end infrastructure, thus broadening the scope of these technologies' applicability.
 
 ## Dataset
 The **Tuft Dental Database** is a valuable resource for dental diagnostics, featuring panoramic X-ray images that offer a comprehensive view of the upper and lower jaws. These images capture detailed structures including teeth, jawbones, and surrounding areas, making them essential for identifying issues like impacted teeth, jaw disorders, and assessing overall dental health. The dataset is meticulously annotated to support the development and evaluation of advanced segmentation models.
@@ -101,106 +103,28 @@ The performance of each model is evaluated using the following metrics:
 - Pixel Accuracy: Computes the percentage of correctly classified pixels in the entire image.
 - IoU (Intersection over Union): Measures the intersection between the predicted segmentation and the ground truth divided by their union, providing a robust evaluation of segmentation performance.
 
-### Dice Coefficient Performance on Validation Set
-
-*This table summarizes the Dice Coefficient on the validation set for various models with ResNet34 backbone. The metrics displayed include the Dice Coefficient, step count, and relative time for each model.*
-
-| Model                  | Dice Coefficient                            | Step   | Relative |
-|------------------------|---------------------------------------------|--------|----------|
-| deeplabv3-resnet34     | 0.8962                                      | 2.31k  | 44m 56s  |
-| deeplabv3plus-resnet34 | 0.9056                                      | 2.222k | 25m 26s  |
-| fpn-resnet34           | 0.8877                                      | 2.53k  | 28m 30s  |
-| pan-resnet34           | 0.9056                                      | 2.508k | 27m 15s  |
-| pspnet-resnet34        | 0.89                                        | 2.596k | 26m 37s  |
-| unet-resnet34          | 0.9078                                      | 1.914k | 25m 0s   |
-| unetplusplus-resnet34  | **<span style="color:green">0.9124</span>** | 2.42k  | 55m 33s  |
-
-
-
-*This table summarizes the Dice Coefficient on the validation set for various models with MobilenetV2 backbone. The metrics displayed include the Dice Coefficient, step count, and relative time for each model.*
-
-| Model                      | Dice Coefficient                            | Step   | Relative |
-|----------------------------|---------------------------------------------|--------|----------|
-| deeplabv3-mobilenet_v2     | 0.8808                                      | 2.156k | 43m 17s  |
-| deeplabv3plus-mobilenet_v2 | 0.898                                       | 3.476k | 40m 18s  |
-| fpn-mobilenet_v2           | 0.8951                                      | 3.102k | 35m 18s  |
-| pan-mobilenet_v2           | 0.8912                                      | 2.904k | 31m 57s  |
-| pspnet-mobilenet_v2        | 0.8797                                      | 3.476k | 34m 46s  |
-| unet-mobilenet_v2          | **<span style="color:green">0.9065</span>** | 2.244k | 31m 38s  |
-| unetplusplus-mobilenet_v2  | 0.9045                                      | 2.376k | 35m 51s  |
-
-### IoU Performance on Validation Set
-*This table summarizes the IoU (Intersection over Union) performance on the validation set for various models with ResNet34 backbone. The metrics displayed include the IoU value, step count, and relative time for each model.*
-
-| Model                  | IoU Value                                   | Step   | Relative |
-|------------------------|---------------------------------------------|--------|----------|
-| deeplabv3-resnet34     | 0.8134                                      | 2.31k  | 44m 56s  |
-| deeplabv3plus-resnet34 | 0.8287                                      | 2.222k | 25m 26s  |
-| fpn-resnet34           | 0.8006                                      | 2.53k  | 28m 30s  |
-| pan-resnet34           | 0.8303                                      | 2.508k | 27m 15s  |
-| pspnet-resnet34        | 0.8031                                      | 2.596k | 26m 37s  |
-| unet-resnet34          | 0.8322                                      | 1.914k | 25m 0s   |
-| unetplusplus-resnet34  | **<span style="color:green">0.8401</span>** | 2.42k  | 55m 33s  |
-
-*This table summarizes the IoU (Intersection over Union) performance on the validation set for various models with MobilenetV2 backbone. The metrics displayed include the IoU value, step count, and relative time for each model.*
-
-| Model                      | IoU Value                                   | Step   | Relative         |
-|----------------------------|---------------------------------------------|--------|------------------|
-| deeplabv3-mobilenet_v2     | 0.7884                                      | 2.156k | 43m 17s          |
-| deeplabv3plus-mobilenet_v2 | 0.8166                                      | 3.476k | 40m 18s          |
-| fpn-mobilenet_v2           | 0.812                                       | 3.102k | 35m 18s          |
-| pan-mobilenet_v2           | 0.8069                                      | 2.904k | 31m 57s          |
-| pspnet-mobilenet_v2        | 0.7866                                      | 3.476k | 34m 46s          |
-| unet-mobilenet_v2          | **<span style="color:green">0.8296</span>** | 2.244k | 31m 38s          |
-| unetplusplus-mobilenet_v2  | 0.8268                                      | 2.376k | 35m 51s</span>** |
-
-
-### Pixel Accuracy Performance on Validation Set
-
-*This table summarizes the Pixel Accuracy performance on the validation set for various models with ResNet34 backbone. The metrics displayed include the Pixel Accuracy value, step count, and relative time for each model.*
-
-| Model                  | Pixel Accuracy                              | Step   | Relative |
-|------------------------|---------------------------------------------|--------|----------|
-| deeplabv3-resnet34     | 0.9748                                      | 2.31k  | 44m 56s  |
-| deeplabv3plus-resnet34 | 0.9773                                      | 2.222k | 25m 26s  |
-| fpn-resnet34           | 0.9731                                      | 2.53k  | 28m 30s  |
-| pan-resnet34           | 0.9776                                      | 2.508k | 27m 15s  |
-| pspnet-resnet34        | 0.9732                                      | 2.596k | 26m 37s  |
-| unet-resnet34          | 0.9778                                      | 1.914k | 25m 0s   |
-| unetplusplus-resnet34  | **<span style="color:green">0.9791</span>** | 2.42k  | 55m 33s  |
-
-*This table summarizes the Pixel Accuracy performance on the validation set for various models with MobilenetV2 backbone. The metrics displayed include the Pixel Accuracy value, step count, and relative time for each model.*
-
-| Model                      | Pixel Accuracy                              | Step   | Relative |
-|----------------------------|---------------------------------------------|--------|----------|
-| deeplabv3-mobilenet_v2     | 0.9709                                      | 2.156k | 43m 17s  |
-| deeplabv3plus-mobilenet_v2 | 0.9756                                      | 3.476k | 40m 18s  |
-| fpn-mobilenet_v2           | 0.9748                                      | 3.102k | 35m 18s  |
-| pan-mobilenet_v2           | 0.9742                                      | 2.904k | 31m 57s  |
-| pspnet-mobilenet_v2        | 0.9706                                      | 3.476k | 34m 46s  |
-| unet-mobilenet_v2          | **<span style="color:green">0.9774</span>** | 2.244k | 31m 38s  |
-| unetplusplus-mobilenet_v2  | 0.977                                       | 2.376k | 35m 51s  |
-
 ### Model Performance Summary
 
-*This table summarizes the performance metrics (Dice Coefficient, IoU, and Pixel Accuracy) on the validation set for various models with ResNet34 and MobilenetV2 backbones.*
+*This table summarizes the performance metrics (Dice Coefficient, IoU, Pixel Accuracy, and Relative Time) on the validation set for various models with ResNet34 and MobilenetV2 backbones. 
+The models are ranked based on the average of Dice Coefficient, IoU, and Pixel Accuracy.*
 
-| Model                                             | Backbone    | Dice Coefficient                            | IoU Value                                   | Pixel Accuracy                              |
-|---------------------------------------------------|-------------|---------------------------------------------|---------------------------------------------|---------------------------------------------|
-| deeplabv3                                         | ResNet34    | 0.8962                                      | 0.8134                                      | 0.9748                                      |
-| deeplabv3plus                                     | ResNet34    | 0.9056                                      | 0.8287                                      | 0.9773                                      |
-| fpn                                               | ResNet34    | 0.8877                                      | 0.8006                                      | 0.9731                                      |
-| pan                                               | ResNet34    | 0.9056                                      | 0.8303                                      | 0.9776                                      |
-| pspnet                                            | ResNet34    | 0.89                                        | 0.8031                                      | 0.9732                                      |
-| unet                                              | ResNet34    | 0.9078                                      | 0.8322                                      | 0.9778                                      |
-| **<span style="color:green">unetplusplus</span>** | ResNet34    | **<span style="color:green">0.9124</span>** | **<span style="color:green">0.8401</span>** | **<span style="color:green">0.9791</span>** |
-| deeplabv3                                         | MobilenetV2 | 0.8808                                      | 0.7884                                      | 0.9709                                      |
-| deeplabv3plus                                     | MobilenetV2 | 0.898                                       | 0.8166                                      | 0.9756                                      |
-| fpn                                               | MobilenetV2 | 0.8951                                      | 0.812                                       | 0.9748                                      |
-| pan                                               | MobilenetV2 | 0.8912                                      | 0.8069                                      | 0.9742                                      |
-| pspnet                                            | MobilenetV2 | 0.8797                                      | 0.7866                                      | 0.9706                                      |
-| <span style="color:green">unet</span>             | MobilenetV2 | <span style="color:green">0.9065</span>     | <span style="color:green">0.8296</span>     | <span style="color:green">0.9774</span>     |
-| unetplusplus                                      | MobilenetV2 | 0.9045                                      | 0.8268                                      | 0.977                                       |
+| Rank | Model      | Backbone    | Dice Coefficient | IoU Value | Pixel Accuracy | Average | Relative |
+|------|------------|-------------|------------------|-----------|----------------|---------|----------|
+| 1    | U-Net++    | ResNet34    | 0.9124           | 0.8401    | 0.9791         | 0.9105  | 55m 33s  |
+| 2    | U-Net      | ResNet34    | 0.9078           | 0.8322    | 0.9778         | 0.9059  | 25m 0s   |
+| 3    | U-Net      | MobilenetV2 | 0.9065           | 0.8296    | 0.9774         | 0.9045  | 31m 38s  |
+| 4    | U-Net++    | MobilenetV2 | 0.9045           | 0.8268    | 0.977          | 0.9028  | 35m 51s  |
+| 5    | DeepLabV3+ | ResNet34    | 0.9056           | 0.8287    | 0.9773         | 0.9039  | 25m 26s  |
+| 6    | PAN        | ResNet34    | 0.9056           | 0.8303    | 0.9776         | 0.9045  | 27m 15s  |
+| 7    | DeepLabV3+ | MobilenetV2 | 0.898            | 0.8166    | 0.9756         | 0.8967  | 40m 18s  |
+| 8    | FPN        | MobilenetV2 | 0.8951           | 0.812     | 0.9748         | 0.8939  | 35m 18s  |
+| 9    | PAN        | MobilenetV2 | 0.8912           | 0.8069    | 0.9742         | 0.8908  | 31m 57s  |
+| 10   | DeepLabV3  | ResNet34    | 0.8962           | 0.8134    | 0.9748         | 0.8948  | 44m 56s  |
+| 11   | DeepLabV3  | MobilenetV2 | 0.8808           | 0.7884    | 0.9709         | 0.8800  | 43m 17s  |
+| 12   | PSPNet     | ResNet34    | 0.89             | 0.8031    | 0.9732         | 0.8888  | 26m 37s  |
+| 13   | FPN        | ResNet34    | 0.8877           | 0.8006    | 0.9731         | 0.8871  | 28m 30s  |
+| 14   | PSPNet     | MobilenetV2 | 0.8797           | 0.7866    | 0.9706         | 0.8790  | 34m 46s  |
+
 
 
 ## Results
