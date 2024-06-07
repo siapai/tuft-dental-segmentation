@@ -256,7 +256,7 @@ The following libraries are utilized in this project to ensure efficient and eff
 - **Albumentations**: `1.4.8`
   - Used for advanced data augmentation techniques to enhance the robustness of the model without losing important details in the images.
 
-- **PyTorch Lightning**: `2.2.4`
+- **PyTorch Lightning**: `2.2.5`
   - Provides a high-level framework for organizing and managing PyTorch code, enabling easier experimentation and model training.
 
 - **Torchmetrics**: `1.4.0`
