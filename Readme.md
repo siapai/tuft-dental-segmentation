@@ -9,6 +9,7 @@ This repository contains experiments on the Tuft Dental Datasets using various s
 - [Backbones](#backbones)
 - [Hyperparameters](#hyperparameters)
 - [Criterion and Evaluation Metrics](#criterion-and-evaluation-metrics)
+- [Results](#results)
 - [Installation](#installation)
 - [Libraries Usage](#libraries-usage)
 
@@ -23,9 +24,18 @@ The **Tuft Dental Database** is a valuable resource for dental diagnostics, feat
 - **Validation Set**: 150 images
 - **Test Set**: 150 images
 
-To enhance the dataset's robustness, a variety of transformations from the Albumentations library have been applied. These augmentations are thoughtfully executed to maintain the intricate details and integrity of the original images, ensuring high-quality data for model training and testing.
+To enhance the robustness of our dataset, we applied a variety of transformations from the Albumentations library. These augmentations are meticulously executed to maintain the intricate details and integrity of the original images, ensuring high-quality data for both model training and testing. The key transformations include:
 
-The dataset has been augmented using various transformations from Albumentations. These augmentations are applied carefully to ensure that the detailed information within the images is preserved.
+- **Geometric Transformations:** These include random rotations, translations, scaling, and keypoint transformations to simulate different viewpoints and image perspectives.
+- **Color and Contrast Adjustments:** Adjustments to brightness, contrast, saturation, and hue to account for varying lighting conditions and improve the model's ability to generalize.
+- **Blur and Noise:** Introduction of Gaussian blur, motion blur, and noise to make the model robust to different types of image artifacts.
+- **Distortions:** Application of elastic transformations, grid distortions, and optical distortions to mimic real-world deformations and enhance the model's adaptability.
+- **Flips:** Horizontal and vertical flips to provide the model with a diverse set of orientations.
+- **Other Effects:** Additional effects such as CLAHE (Contrast Limited Adaptive Histogram Equalization), sharpen, emboss, blur, and gamma correction to further diversify the training data and enhance feature extraction.
+
+These augmentations are carefully applied to preserve the detailed information within the images, ensuring the augmented dataset remains a valuable resource for effective model training and testing.
+
+![Tuft Dental](resources/tuft_dental_augmented.png)
 ## Models
 The following segmentation architectures are implemented and compared:
 - **U-Net**: 
@@ -90,6 +100,113 @@ The performance of each model is evaluated using the following metrics:
 - Dice Coefficient: Measures the overlap between the predicted segmentation and the ground truth. It is particularly useful for imbalanced datasets.
 - Pixel Accuracy: Computes the percentage of correctly classified pixels in the entire image.
 - IoU (Intersection over Union): Measures the intersection between the predicted segmentation and the ground truth divided by their union, providing a robust evaluation of segmentation performance.
+
+### Dice Coefficient Performance on Validation Set
+
+*This table summarizes the Dice Coefficient on the validation set for various models with ResNet34 backbone. The metrics displayed include the Dice Coefficient, step count, and relative time for each model.*
+
+| Model                  | Dice Coefficient                            | Step   | Relative |
+|------------------------|---------------------------------------------|--------|----------|
+| deeplabv3-resnet34     | 0.8962                                      | 2.31k  | 44m 56s  |
+| deeplabv3plus-resnet34 | 0.9056                                      | 2.222k | 25m 26s  |
+| fpn-resnet34           | 0.8877                                      | 2.53k  | 28m 30s  |
+| pan-resnet34           | 0.9056                                      | 2.508k | 27m 15s  |
+| pspnet-resnet34        | 0.89                                        | 2.596k | 26m 37s  |
+| unet-resnet34          | 0.9078                                      | 1.914k | 25m 0s   |
+| unetplusplus-resnet34  | **<span style="color:green">0.9124</span>** | 2.42k  | 55m 33s  |
+
+
+
+*This table summarizes the Dice Coefficient on the validation set for various models with MobilenetV2 backbone. The metrics displayed include the Dice Coefficient, step count, and relative time for each model.*
+
+| Model                      | Dice Coefficient                            | Step   | Relative |
+|----------------------------|---------------------------------------------|--------|----------|
+| deeplabv3-mobilenet_v2     | 0.8808                                      | 2.156k | 43m 17s  |
+| deeplabv3plus-mobilenet_v2 | 0.898                                       | 3.476k | 40m 18s  |
+| fpn-mobilenet_v2           | 0.8951                                      | 3.102k | 35m 18s  |
+| pan-mobilenet_v2           | 0.8912                                      | 2.904k | 31m 57s  |
+| pspnet-mobilenet_v2        | 0.8797                                      | 3.476k | 34m 46s  |
+| unet-mobilenet_v2          | **<span style="color:green">0.9065</span>** | 2.244k | 31m 38s  |
+| unetplusplus-mobilenet_v2  | 0.9045                                      | 2.376k | 35m 51s  |
+
+### IoU Performance on Validation Set
+*This table summarizes the IoU (Intersection over Union) performance on the validation set for various models with ResNet34 backbone. The metrics displayed include the IoU value, step count, and relative time for each model.*
+
+| Model                  | IoU Value                                   | Step   | Relative |
+|------------------------|---------------------------------------------|--------|----------|
+| deeplabv3-resnet34     | 0.8134                                      | 2.31k  | 44m 56s  |
+| deeplabv3plus-resnet34 | 0.8287                                      | 2.222k | 25m 26s  |
+| fpn-resnet34           | 0.8006                                      | 2.53k  | 28m 30s  |
+| pan-resnet34           | 0.8303                                      | 2.508k | 27m 15s  |
+| pspnet-resnet34        | 0.8031                                      | 2.596k | 26m 37s  |
+| unet-resnet34          | 0.8322                                      | 1.914k | 25m 0s   |
+| unetplusplus-resnet34  | **<span style="color:green">0.8401</span>** | 2.42k  | 55m 33s  |
+
+*This table summarizes the IoU (Intersection over Union) performance on the validation set for various models with MobilenetV2 backbone. The metrics displayed include the IoU value, step count, and relative time for each model.*
+
+| Model                      | IoU Value                                   | Step   | Relative         |
+|----------------------------|---------------------------------------------|--------|------------------|
+| deeplabv3-mobilenet_v2     | 0.7884                                      | 2.156k | 43m 17s          |
+| deeplabv3plus-mobilenet_v2 | 0.8166                                      | 3.476k | 40m 18s          |
+| fpn-mobilenet_v2           | 0.812                                       | 3.102k | 35m 18s          |
+| pan-mobilenet_v2           | 0.8069                                      | 2.904k | 31m 57s          |
+| pspnet-mobilenet_v2        | 0.7866                                      | 3.476k | 34m 46s          |
+| unet-mobilenet_v2          | **<span style="color:green">0.8296</span>** | 2.244k | 31m 38s          |
+| unetplusplus-mobilenet_v2  | 0.8268                                      | 2.376k | 35m 51s</span>** |
+
+
+### Pixel Accuracy Performance on Validation Set
+
+*This table summarizes the Pixel Accuracy performance on the validation set for various models with ResNet34 backbone. The metrics displayed include the Pixel Accuracy value, step count, and relative time for each model.*
+
+| Model                  | Pixel Accuracy                              | Step   | Relative |
+|------------------------|---------------------------------------------|--------|----------|
+| deeplabv3-resnet34     | 0.9748                                      | 2.31k  | 44m 56s  |
+| deeplabv3plus-resnet34 | 0.9773                                      | 2.222k | 25m 26s  |
+| fpn-resnet34           | 0.9731                                      | 2.53k  | 28m 30s  |
+| pan-resnet34           | 0.9776                                      | 2.508k | 27m 15s  |
+| pspnet-resnet34        | 0.9732                                      | 2.596k | 26m 37s  |
+| unet-resnet34          | 0.9778                                      | 1.914k | 25m 0s   |
+| unetplusplus-resnet34  | **<span style="color:green">0.9791</span>** | 2.42k  | 55m 33s  |
+
+*This table summarizes the Pixel Accuracy performance on the validation set for various models with MobilenetV2 backbone. The metrics displayed include the Pixel Accuracy value, step count, and relative time for each model.*
+
+| Model                      | Pixel Accuracy                              | Step   | Relative |
+|----------------------------|---------------------------------------------|--------|----------|
+| deeplabv3-mobilenet_v2     | 0.9709                                      | 2.156k | 43m 17s  |
+| deeplabv3plus-mobilenet_v2 | 0.9756                                      | 3.476k | 40m 18s  |
+| fpn-mobilenet_v2           | 0.9748                                      | 3.102k | 35m 18s  |
+| pan-mobilenet_v2           | 0.9742                                      | 2.904k | 31m 57s  |
+| pspnet-mobilenet_v2        | 0.9706                                      | 3.476k | 34m 46s  |
+| unet-mobilenet_v2          | **<span style="color:green">0.9774</span>** | 2.244k | 31m 38s  |
+| unetplusplus-mobilenet_v2  | 0.977                                       | 2.376k | 35m 51s  |
+
+### Model Performance Summary
+
+*This table summarizes the performance metrics (Dice Coefficient, IoU, and Pixel Accuracy) on the validation set for various models with ResNet34 and MobilenetV2 backbones.*
+
+| Model                                             | Backbone    | Dice Coefficient                            | IoU Value                                   | Pixel Accuracy                              |
+|---------------------------------------------------|-------------|---------------------------------------------|---------------------------------------------|---------------------------------------------|
+| deeplabv3                                         | ResNet34    | 0.8962                                      | 0.8134                                      | 0.9748                                      |
+| deeplabv3plus                                     | ResNet34    | 0.9056                                      | 0.8287                                      | 0.9773                                      |
+| fpn                                               | ResNet34    | 0.8877                                      | 0.8006                                      | 0.9731                                      |
+| pan                                               | ResNet34    | 0.9056                                      | 0.8303                                      | 0.9776                                      |
+| pspnet                                            | ResNet34    | 0.89                                        | 0.8031                                      | 0.9732                                      |
+| unet                                              | ResNet34    | 0.9078                                      | 0.8322                                      | 0.9778                                      |
+| **<span style="color:green">unetplusplus</span>** | ResNet34    | **<span style="color:green">0.9124</span>** | **<span style="color:green">0.8401</span>** | **<span style="color:green">0.9791</span>** |
+| deeplabv3                                         | MobilenetV2 | 0.8808                                      | 0.7884                                      | 0.9709                                      |
+| deeplabv3plus                                     | MobilenetV2 | 0.898                                       | 0.8166                                      | 0.9756                                      |
+| fpn                                               | MobilenetV2 | 0.8951                                      | 0.812                                       | 0.9748                                      |
+| pan                                               | MobilenetV2 | 0.8912                                      | 0.8069                                      | 0.9742                                      |
+| pspnet                                            | MobilenetV2 | 0.8797                                      | 0.7866                                      | 0.9706                                      |
+| <span style="color:green">unet</span>             | MobilenetV2 | <span style="color:green">0.9065</span>     | <span style="color:green">0.8296</span>     | <span style="color:green">0.9774</span>     |
+| unetplusplus                                      | MobilenetV2 | 0.9045                                      | 0.8268                                      | 0.977                                       |
+
+
+## Results
+*This section showcases the performance of the Unet++ ResNet34 model on the test dataset. Below are the original image, ground truth, and the model's prediction.*
+
+![Tuft Dental](resources/tuft_dental_results.png)
 
 ## Installation
 Clone the repository and install the required dependencies:
