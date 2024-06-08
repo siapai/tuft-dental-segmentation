@@ -110,6 +110,8 @@ The performance of each model is evaluated using the following metrics:
 This table summarizes the performance metrics (Dice Coefficient, IoU, Pixel Accuracy, and Relative Time) on the **validation set** for various models with ResNet34 and MobilenetV2 backbones. 
 The models are ranked based on the average of Dice Coefficient, IoU, and Pixel Accuracy.
 
+[See Training Notebooks](notebooks)
+
 | Rank | Architecture | Encoder     | Dice Coefficient | IoU Value | Pixel Accuracy | Average | Relative |
 |------|--------------|-------------|------------------|-----------|----------------|---------|----------|
 | 1    | U-Net++      | ResNet34    | 0.9124           | 0.8401    | 0.9791         | 0.9105  | 55m 33s  |
@@ -131,6 +133,8 @@ The models are ranked based on the average of Dice Coefficient, IoU, and Pixel A
 ## Test Results
 This table summarizes the performance metrics (Dice Coefficient, IoU, Pixel Accuracy, and Inference Time) on the **test set** for various models with ResNet34 and MobilenetV2 backbones.
 The rank is based on the average of the test dice, test IoU, and test accuracy metrics.
+
+[See Test Inference Notebook](notebooks/Tuft_Dental_Test_Inference.ipynb)
 
 | Rank | Architecture  | Encoder        | Test Dice   | Test IoU    | Test Accuracy | Inference Time (s) |
 |------|---------------|----------------|-------------|-------------|---------------|--------------------|
@@ -215,10 +219,8 @@ pip install -r requirements.txt
 ### Using Pytorch Model
 [>> Download Pytorch Model <<](https://drive.google.com/file/d/1-hoRpjWgs14i_HqItV_fapQVwiq_HkFE/view?usp=drive_link)
 
-[See Inference.ipynb](Inference.ipynb)
 
-*see Inference.ipynb*
-```angular2html
+```python
 from training import DentalModel
 
 ...
@@ -240,13 +242,15 @@ with torch.inference_mode():
 
 ...
 
+```
+[See Inference.ipynb](Inference.ipynb)
 
 ### Using Onnx Model
-```
+
 [>> Download Onnx Model <<](https://drive.google.com/file/d/10varVO19sgIlGb07OkZA4mk8fB5JY4yi/view?usp=sharing)
 
-[See Inference_Onnx.ipynb](Inference_Onnx.ipynb)
-```
+
+```python
 import onnxruntime as ort
 
 ...
@@ -263,6 +267,7 @@ output = ort_outs[0]
 ...
 
 ```
+[See Inference_Onnx.ipynb](Inference_Onnx.ipynb)
 
 
 ## Run Tensorboard
