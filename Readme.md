@@ -24,6 +24,8 @@ The primary goal is to pinpoint the best-performing model that balances accuracy
 ## Dataset
 The **Tuft Dental Database** is a valuable resource for dental diagnostics, featuring panoramic X-ray images that offer a comprehensive view of the upper and lower jaws. These images capture detailed structures including teeth, jawbones, and surrounding areas, making them essential for identifying issues like impacted teeth, jaw disorders, and assessing overall dental health. The dataset is meticulously annotated to support the development and evaluation of advanced segmentation models.
 
+[Download Dataset Here](https://tdd.ece.tufts.edu/)
+
 ### Dataset Split
 - **Training Set**: 700 images
 - **Validation Set**: 150 images
@@ -243,7 +245,7 @@ with torch.inference_mode():
 ...
 
 ```
-[See Inference.ipynb](Inference.ipynb)
+[See Inference Notebook](Inference.ipynb)
 
 ### Using Onnx Model
 
@@ -267,12 +269,12 @@ output = ort_outs[0]
 ...
 
 ```
-[See Inference_Onnx.ipynb](Inference_Onnx.ipynb)
+[See Inference_Onnx Notebook](Inference_Onnx.ipynb)
 
 
 ## Run Tensorboard
 
-Here’s how you can enhance the process by running TensorBoard to explore experiment results
+Here’s how you can run TensorBoard to explore experiment results
 ```
  tensorboard --logdir=tensorboards
 ```
