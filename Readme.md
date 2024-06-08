@@ -212,7 +212,10 @@ pip install -r requirements.txt
 ```
 
 ## Inference Usage
-[>> Download Model <<](https://drive.google.com/file/d/1-hoRpjWgs14i_HqItV_fapQVwiq_HkFE/view?usp=drive_link)
+### Using Pytorch Model
+[>> Download Pytorch Model <<](https://drive.google.com/file/d/1-hoRpjWgs14i_HqItV_fapQVwiq_HkFE/view?usp=drive_link)
+
+[See Inference.ipynb](Inference.ipynb)
 
 *see Inference.ipynb*
 ```angular2html
@@ -220,6 +223,7 @@ from training import DentalModel
 
 ...
 
+# Load pytorch model
 arch = "unetplusplus"
 encoder_name = "resnet34"
 path = "tensorboards/unetplusplus-resnet34/version_0/checkpoints/best_checkpoint.ckpt"
@@ -227,6 +231,7 @@ model = DentalModel.load_from_checkpoint(path, arch=arch, encoder_name=encoder_n
 
 model.to(device)
 
+# Run inference
 model.eval()
 with torch.inference_mode():
     output = model(augmented.to(device))
@@ -235,7 +240,30 @@ with torch.inference_mode():
 
 ...
 
+
+### Using Onnx Model
 ```
+[>> Download Onnx Model <<](https://drive.google.com/file/d/10varVO19sgIlGb07OkZA4mk8fB5JY4yi/view?usp=sharing)
+
+[See Inference_Onnx.ipynb](Inference_Onnx.ipynb)
+```
+import onnxruntime as ort
+
+...
+
+# Load the ONNX model
+onnx_model_path = "upp_resnet_model.onnx"
+ort_session = ort.InferenceSession(onnx_model_path)
+
+# Run inference
+ort_inputs = {'input': target}
+ort_outs = ort_session.run(None, ort_inputs)
+output = ort_outs[0]
+
+...
+
+```
+
 
 ## Run Tensorboard
 
