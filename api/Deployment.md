@@ -28,6 +28,5 @@ http://localhost:8000
 http://localhost:8000/docs
 ```
 
-**Web Preview**
 
-![Tuft Dental](preview.png)
+[*Web Demo*](https://huggingface.co/spaces/siapai/dental-segmentation)
