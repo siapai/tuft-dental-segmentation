@@ -259,7 +259,7 @@ with torch.inference_mode():
 
 ### Using Onnx Model
 
-[>> Download Onnx Model <<](https://drive.google.com/file/d/1-zq7fjaa7nYSoXqdVZj3eraitVELAPVX/view?usp=sharing)
+[>> Download Onnx Model <<](https://drive.google.com/file/d/1nrESyFtLJKEKMDPlc6Shou3AVYK-Xtf7/view?usp=sharing)
 
 
 ```python
