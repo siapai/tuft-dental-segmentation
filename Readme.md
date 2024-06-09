@@ -13,7 +13,8 @@ This repository contains experiments on the Tuft Dental Datasets using various s
 - [Prediction Results](#prediction-results)
 - [Installation](#installation)
 - [Inference Usage](#inference-usage)
-- [Run Tensorboard](#run-tensorboard)
+- [Explore Experiment Results](#run-tensorboard)
+- [Deployment](#deployment)
 - [Libraries](#libraries)
 
 ## Introduction
@@ -288,6 +289,11 @@ Here’s how you can run TensorBoard to explore experiment results
 ```
  tensorboard --logdir=tensorboards
 ```
+
+## Deployment
+*For API and docker deployment, please visit [Deployment.md](api/Deployment.md)*
+
+
 ## Libraries
 
 The following libraries are utilized in this project to ensure efficient and effective processing and modeling of the dataset:
