@@ -64,5 +64,6 @@ Desktop.ini
 
 # Ignore all .ckpt files in the folder and subfolders
 **/*.ckpt
+**/*.onnx
 
 data/
