@@ -8,6 +8,7 @@ from .decoders.deeplabv3 import DeepLabV3, DeepLabV3Plus
 from .decoders.unetplusplus import UnetPlusPlus
 from .decoders.pspnet import PSPNet
 from .decoders.pan import PAN
+from .decoders.linknet import Linknet
 
 from .__version__ import __version__
 
@@ -34,7 +35,8 @@ def create_model(
         DeepLabV3Plus,
         UnetPlusPlus,
         PSPNet,
-        PAN
+        PAN,
+        Linknet
     ]
 
     archs_dict = {a.__name__.lower(): a for a in archs}
